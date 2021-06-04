@@ -57,16 +57,18 @@ const usuariosPost = async (req = request, res = response) => {
 }
 
 
-const usuariosDelete = async (req = request, res = response) => {
+const usuariosDelete = async (req, res = response) => {
 
     const { id } = req.params;
+
+    const uid = req.uid;
     // Para borrar por completo en la BD
     // const usuario = await Usuario.findByIdAndDelete(id)
     const usuario = await Usuario.findByIdAndUpdate(id, { estado: false })
+    const usuarioAutenticado = req.usuario;
 
-    res.json({
-        usuario
-    })
+    // console.log(uid)
+    res.json({ usuario, usuarioAutenticado })
 }
 
 
